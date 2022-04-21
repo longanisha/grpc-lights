@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_package = "com.karmen.grpc";
+
+//service
+
+service detector{
+  rpc checkStatus(DetectorRequest) returns (DetectorResponse) {}
+}
+
+message DetectorRequest{
+  bool isDetected = 1 ;
+}
+
+message DetectorResponse{
+  string responsemsg = 1;
+  int32  responseCode = 2;
+}
