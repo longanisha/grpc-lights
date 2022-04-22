@@ -13,7 +13,6 @@ public class DetectorClient {
 
         detectorGrpc.detectorBlockingStub stub =  detectorGrpc.newBlockingStub(channel);
 
-
         Detector.DetectorRequest request = Detector.DetectorRequest.newBuilder().setIsDetected(true).build();
 
         Detector.DetectorResponse response = stub.checkStatus(request);

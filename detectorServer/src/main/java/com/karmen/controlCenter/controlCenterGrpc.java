@@ -1,10 +1,13 @@
 package com.karmen.grpc.controlCenter;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
 import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
 import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
@@ -33,7 +36,7 @@ public final class controlCenterGrpc {
     if ((getCheckLampStatusMethod = controlCenterGrpc.getCheckLampStatusMethod) == null) {
       synchronized (controlCenterGrpc.class) {
         if ((getCheckLampStatusMethod = controlCenterGrpc.getCheckLampStatusMethod) == null) {
-          controlCenterGrpc.getCheckLampStatusMethod = getCheckLampStatusMethod = 
+          controlCenterGrpc.getCheckLampStatusMethod = getCheckLampStatusMethod =
               io.grpc.MethodDescriptor.<LampControl.LampRequest, LampControl.LampResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
@@ -49,6 +52,38 @@ public final class controlCenterGrpc {
         }
      }
      return getCheckLampStatusMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<LampControl.ChatRequest,
+      LampControl.ChatResponse> getChatWithAgentMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "chatWithAgent",
+      requestType = LampControl.ChatRequest.class,
+      responseType = LampControl.ChatResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<LampControl.ChatRequest,
+      LampControl.ChatResponse> getChatWithAgentMethod() {
+    io.grpc.MethodDescriptor<LampControl.ChatRequest, LampControl.ChatResponse> getChatWithAgentMethod;
+    if ((getChatWithAgentMethod = controlCenterGrpc.getChatWithAgentMethod) == null) {
+      synchronized (controlCenterGrpc.class) {
+        if ((getChatWithAgentMethod = controlCenterGrpc.getChatWithAgentMethod) == null) {
+          controlCenterGrpc.getChatWithAgentMethod = getChatWithAgentMethod =
+              io.grpc.MethodDescriptor.<LampControl.ChatRequest, LampControl.ChatResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "controlCenter", "chatWithAgent"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  LampControl.ChatRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  LampControl.ChatResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new controlCenterMethodDescriptorSupplier("chatWithAgent"))
+                  .build();
+          }
+        }
+     }
+     return getChatWithAgentMethod;
   }
 
   /**
@@ -85,6 +120,13 @@ public final class controlCenterGrpc {
       asyncUnimplementedUnaryCall(getCheckLampStatusMethod(), responseObserver);
     }
 
+    /**
+     */
+    public io.grpc.stub.StreamObserver<LampControl.ChatRequest> chatWithAgent(
+        io.grpc.stub.StreamObserver<LampControl.ChatResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getChatWithAgentMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -94,6 +136,13 @@ public final class controlCenterGrpc {
                 LampControl.LampRequest,
                 LampControl.LampResponse>(
                   this, METHODID_CHECK_LAMP_STATUS)))
+          .addMethod(
+            getChatWithAgentMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                LampControl.ChatRequest,
+                LampControl.ChatResponse>(
+                  this, METHODID_CHAT_WITH_AGENT)))
           .build();
     }
   }
@@ -122,6 +171,14 @@ public final class controlCenterGrpc {
                                 io.grpc.stub.StreamObserver<LampControl.LampResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getCheckLampStatusMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<LampControl.ChatRequest> chatWithAgent(
+        io.grpc.stub.StreamObserver<LampControl.ChatResponse> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getChatWithAgentMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -172,6 +229,7 @@ public final class controlCenterGrpc {
   }
 
   private static final int METHODID_CHECK_LAMP_STATUS = 0;
+  private static final int METHODID_CHAT_WITH_AGENT = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -204,6 +262,9 @@ public final class controlCenterGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_CHAT_WITH_AGENT:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.chatWithAgent(
+              (io.grpc.stub.StreamObserver<LampControl.ChatResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -256,6 +317,7 @@ public final class controlCenterGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new controlCenterFileDescriptorSupplier())
               .addMethod(getCheckLampStatusMethod())
+              .addMethod(getChatWithAgentMethod())
               .build();
         }
       }

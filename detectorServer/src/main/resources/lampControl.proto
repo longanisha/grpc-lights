@@ -6,7 +6,7 @@ option java_package = "com.karmen.grpc";
 
 service controlCenter{
   rpc checkLampStatus( LampRequest) returns (stream LampResponse) {};
-
+  rpc chatWithAgent(stream ChatRequest) returns (stream ChatResponse) {};
 }
 
 message LampRequest{
@@ -14,6 +14,13 @@ message LampRequest{
 }
 
 message LampResponse{
+  string responseMsg = 1;
+  int32  responseCode = 2;
+}
+message ChatRequest{
+  string chatMsg = 1;
+}
+message ChatResponse{
   string responseMsg = 1;
   int32  responseCode = 2;
 }

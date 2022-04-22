@@ -3,7 +3,6 @@ package com.karmen.grpc.detector;
 import io.grpc.stub.StreamObserver;
 
 public class DetectedService extends detectorGrpc.detectorImplBase{
-
     @Override
     public void checkStatus(Detector.DetectorRequest request, StreamObserver<Detector.DetectorResponse> responseObserver) {
 
@@ -22,7 +21,5 @@ public class DetectedService extends detectorGrpc.detectorImplBase{
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
-
-
 
 }

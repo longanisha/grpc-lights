@@ -23,7 +23,29 @@ public class ControlService extends controlCenterGrpc.controlCenterImplBase{
         } finally {
             responseObserver.onCompleted();
         }
+    }
 
-        }
+    @Override
+    public StreamObserver<LampControl.ChatRequest> chatWithAgent(StreamObserver<LampControl.ChatResponse> responseObserver) {
+        StreamObserver<LampControl.ChatRequest> requestStreamObserver = new StreamObserver<LampControl.ChatRequest>() {
+            @Override
+            public void onNext(LampControl.ChatRequest value) {
+                String result = "Hello "+ value.getChatMsg();
+                LampControl.ChatResponse response = LampControl.ChatResponse
+                        .newBuilder()
+                        .setResponseMsg(result)
+                        .build();
+                responseObserver.onNext(response);
+            }
+            @Override
+            public void onError(Throwable t) {
+            }
 
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+        return requestStreamObserver;
+    }
 }
