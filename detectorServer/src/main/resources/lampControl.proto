@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "com.karmen.grpc";
+
+//service
+
+service controlCenter{
+  rpc checkLampStatus( LampRequest) returns (stream LampResponse) {};
+
+}
+
+message LampRequest{
+  int32 lampId = 2;
+}
+
+message LampResponse{
+  string responseMsg = 1;
+  int32  responseCode = 2;
+}
