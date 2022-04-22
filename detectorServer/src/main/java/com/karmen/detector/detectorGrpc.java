@@ -1,4 +1,4 @@
-package com.karmen.grpc.grpc;
+package com.karmen.grpc.detector;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncUnaryCall;

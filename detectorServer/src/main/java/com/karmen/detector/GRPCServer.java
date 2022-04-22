@@ -1,5 +1,4 @@
-package com.karmen.grpc.server;
-import com.karmen.grpc.service.DetectedService;
+package com.karmen.grpc.detector;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 

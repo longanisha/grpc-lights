@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "com.karmen.grpc";
+
+//service
+
+service lamp{
+  rpc switchLamp(OnOffRequest) returns (OnOffResponse);
+}
+
+message OnOffRequest{
+  bool toggleLamp = 1 ;
+  int32 lampId = 2;
+}
+
+message OnOffResponse{
+  string responseMsg = 1;
+  int32  responseCode = 2;
+}

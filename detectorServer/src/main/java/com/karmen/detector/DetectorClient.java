@@ -1,7 +1,5 @@
-package com.karmen.grpc.client;
+package com.karmen.grpc.detector;
 
-import com.karmen.grpc.grpc.Detector;
-import com.karmen.grpc.grpc.detectorGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 

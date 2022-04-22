@@ -1,7 +1,5 @@
-package com.karmen.grpc.service;
+package com.karmen.grpc.detector;
 
-import com.karmen.grpc.grpc.Detector;
-import com.karmen.grpc.grpc.detectorGrpc;
 import io.grpc.stub.StreamObserver;
 
 public class DetectedService extends detectorGrpc.detectorImplBase{
